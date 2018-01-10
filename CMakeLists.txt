@@ -110,7 +110,7 @@ ENDIF (WITH_CHECK_MEM_LEAK)
 
 #设置工程变量
 SET(RootProject ${CMAKE_SOURCE_DIR})
-SET(RootProjectInclude ${RadarProject}/include)
+SET(RootProjectInclude ${RootProject}/include)
 #SET(RadarProjectRunTimeLib ${RadarProject}/3dpart/${QT_VERSIONS}/bin/${DEST_BUILD_VERSION})
 #SET(RadarProjectLib ${RadarProject}/3dpart/${QT_VERSIONS}/lib/${DEST_BUILD_VERSION})
 #SET(GisPluginDir ${RadarProject}/gisplugins/${DEST_BUILD_VERSION})
@@ -135,4 +135,4 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/library)	#基础依赖库
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/apps)		#应用
 
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/i18n) #国际化
+#add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/i18n) #国际化

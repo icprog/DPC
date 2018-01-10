@@ -1,6 +1,6 @@
-﻿set (BUILD_DPC_MANAGER TRUE CACHE BOOL "whether to build the manager projects")
+﻿set (BUILD_DPC_MANAGER FALSE CACHE BOOL "whether to build the manager projects")
 set (BUILD_DPC_SERVER TRUE CACHE BOOL "whether to build the server projects")
-set (BUILD_DPC_AGENT TRUE CACHE BOOL "whether to build the agent projects")
+set (BUILD_DPC_AGENT FALSE CACHE BOOL "whether to build the agent projects")
 set (APPS
 )
 

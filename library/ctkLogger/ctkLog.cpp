@@ -8,6 +8,7 @@
 #include <QFileInfo>
 #include <sstream>
 #include <iomanip>
+#include <QDateTime>
 
 #include <QThread>
 #include <QDir>
@@ -39,7 +40,7 @@ QLogger::QLogger( qint64 size /* = 10M */, qint64 num /* = 10 */ )
     m_strAppName = m_strAppName.mid(begin, end-begin);
 
     //生成存放log的目录路径
-    m_strLogPath = QString("%1/log/").arg(qApp->applicationDirPath());
+    m_strLogPath = QString("%1/log/").arg(QString(qApp->applicationDirPath()));
     QDir sLogDir(m_strLogPath);
     if (!sLogDir.exists())
     {
@@ -81,7 +82,8 @@ void QLogger::printError( const QString& msg, const char* file /*= NULL*/, const
 
 void QLogger::print( const QString &level, const QString& msg, const char* file /*= NULL*/, const char* function /*= NULL*/, int line /*= -1 */ )
 {
-    QMutexLocker lockGuard(&m_oLocker);
+    //QMutexLocker lockGuard(&m_oLocker);
+    QMutexLocker locker(&m_oLocker);
     QString m;
 
     if ( !file )
@@ -132,7 +134,7 @@ void QLogger::print( const QString &level, const QString& msg, const char* file 
         backOldLogFile(m_strLogPath);
     }
 
-    // QMutexLocker locker(&m_oLocker);
+
 
     FILE *fp = fopen(m_strLogPath.toLocal8Bit().toStdString().c_str(), "a+");
 
@@ -140,8 +142,8 @@ void QLogger::print( const QString &level, const QString& msg, const char* file 
     {
         return;
     }
-    QString strDt = QDateTime::currentDateTime().toString("yyyy/MM/dd hh:mm:ss");
-    std::string tmp_strFormat((strDt + " " + m).toLocal8Bit().toStdString());
+    m.prepend(QDateTime::currentDateTime().toString("yyyy/MM/dd hh:mm:ss") + " " );
+    std::string tmp_strFormat(m.toLocal8Bit().toStdString());
     std::stringstream stream;
     stream << tmp_strFormat << "\n";
     fprintf(fp, stream.str().c_str());
@@ -244,6 +246,7 @@ void QLogger::backOldLogFile(const QString &in_strFilePath)
                 }
             }
 
+
         }
 
         for (int i = MaxNum; i > 0; i--)
@@ -269,4 +272,5 @@ void QLogger::backOldLogFile(const QString &in_strFilePath)
     //	file.rename(fileInfo.absolutePath() + "/" +  m_strAppName +  + ".log." + QString::number(MaxNum + 1));
     //}
 }
+
 
