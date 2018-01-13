@@ -16,8 +16,11 @@
 #define _dpc_server_mainwindow_h_
 
 #include "ui_mainwindow.h"
+#include "menu.h"
 
 #include <QMainWindow>
+#include <QLabel>
+#include <QDateTime>
 
 // 前置声明
 class CModuleList;
@@ -41,18 +44,42 @@ public:
      */
     virtual ~MainWindow();
 
+protected:
     /**
      * @brief:初始化界面布局
      * @return:void 无
      */
     void initUI();
 
+    /**
+     * @brief:计算运行时长
+     * @return:void
+     */
+    void calRunTime();
+
+protected slots:
+    /**
+     * @brief:状态栏刷新
+     * @return:void
+     */
+    void refreshStatus();
+
 private:
     Ui::MainWindow ui;
 
-    CModuleList *m_pModuleList;
-    CSystemLog *m_pSysLog;
-    CThreadLog *m_pThreadLog;
+    /*********************菜单栏及工具栏*********************/
+    friend class CMenu;
+    CMenu *m_pMenu;
+
+    /*********************中央区域**************************/
+    CModuleList *m_pModuleList; // 模块列表
+    CSystemLog *m_pSysLog;		// 系统日志
+    CThreadLog *m_pThreadLog;	// 线程日志
+
+    /*********************状态栏**********************/
+    QLabel *m_pSysTime;			// 状态栏系统时间
+    QLabel *m_pRunTime;			// 系统运行时间
+    QDateTime m_runTime;		// 系统运行时间
 };
 
 #endif

@@ -8,6 +8,8 @@ SET(SRCS
   ${CMAKE_CURRENT_SOURCE_DIR}/systemlog.cpp
   ${CMAKE_CURRENT_SOURCE_DIR}/threadlog.cpp
 
+  ${CMAKE_CURRENT_SOURCE_DIR}/menu.cpp
+
 )
 
 # .h文件
@@ -16,6 +18,8 @@ SET(HDRS
 	${CMAKE_CURRENT_SOURCE_DIR}/modulelist.h
 	${CMAKE_CURRENT_SOURCE_DIR}/systemlog.h
 	${CMAKE_CURRENT_SOURCE_DIR}/threadlog.h
+
+	${CMAKE_CURRENT_SOURCE_DIR}/menu.h
 )
 
 SET(MOCS
@@ -23,6 +27,8 @@ SET(MOCS
 	${CMAKE_CURRENT_SOURCE_DIR}/modulelist.h
 	${CMAKE_CURRENT_SOURCE_DIR}/systemlog.h
 	${CMAKE_CURRENT_SOURCE_DIR}/threadlog.h
+
+	${CMAKE_CURRENT_SOURCE_DIR}/menu.h
 
 )
 
