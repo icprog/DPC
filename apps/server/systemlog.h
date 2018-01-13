@@ -1,8 +1,9 @@
 ﻿/***************************************************************************
      --------------------------------------
-    Date                 : 10-Jan-2018
+    Date                 : 13-Jan-2018
     Copyright            : (C) 2018 by bjliu
     Email                : liubojun@sina.com
+
  ***************************************************************************
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -12,47 +13,20 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef _dpc_server_mainwindow_h_
-#define _dpc_server_mainwindow_h_
+#ifndef _dpc_server_systemlog_h_
+#define _dpc_server_systemlog_h_
 
-#include "ui_mainwindow.h"
+#include "ui_systemlog.h"
 
-#include <QMainWindow>
-
-// 前置声明
-class CModuleList;
-class CSystemLog;
-class CThreadLog;
-
-class MainWindow : public QMainWindow
+class CSystemLog : public QWidget
 {
     Q_OBJECT
 public:
-    /**
-     * @brief:构造函数
-     * @param: QMainWindow * parent 父窗口
-     * @return:无
-     */
-    MainWindow(QMainWindow *parent = NULL);
+    CSystemLog(QWidget *parent = NULL);
 
-    /**
-     * @brief:析构函数
-     * @return: 无
-     */
-    virtual ~MainWindow();
-
-    /**
-     * @brief:初始化界面布局
-     * @return:void 无
-     */
-    void initUI();
+    virtual ~CSystemLog();
 
 private:
-    Ui::MainWindow ui;
-
-    CModuleList *m_pModuleList;
-    CSystemLog *m_pSysLog;
-    CThreadLog *m_pThreadLog;
+    Ui::SystemLogWidget ui;
 };
-
 #endif

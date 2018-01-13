@@ -12,9 +12,23 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
- 
+
 #ifndef _dpc_server_modulelist_h_
 #define _dpc_server_modulelist_h_
 
+#include "ui_modulelist.h"
+#include <QWidget>
 
+class CModuleList : public QWidget
+{
+    Q_OBJECT
+public:
+    CModuleList(QWidget *parent = NULL);
+
+    virtual ~CModuleList();
+
+private:
+    Ui::ModuleWidget ui;
+
+};
 #endif

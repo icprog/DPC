@@ -32,6 +32,8 @@ int main(int argc, char **argv)
     QTextCodec::setCodecForTr(codec);
 #endif
 
+    MainWindow wnd;
+    wnd.show();
     return app.exec();
 
 }
