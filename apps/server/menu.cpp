@@ -9,7 +9,7 @@
 CMenu::CMenu(MainWindow *parent) :m_pWnd(parent)
 {
     m_strMenuFilePath = QCoreApplication::applicationDirPath() + "/config/menu.ini";
-    m_strResDirPath = QCoreApplication::applicationDirPath() + "/res";
+    m_strResDirPath = QCoreApplication::applicationDirPath() + "/procpe/res";
     init();
 
     initUI();
