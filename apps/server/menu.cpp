@@ -75,23 +75,46 @@ void CMenu::init()
 
 void CMenu::initUI()
 {
-    foreach(MenuDetail t_oMenu,  m_oMenu)
+    foreach(MenuDetail t_oMenu, m_oMenu)
     {
+        /**********************菜单父子关系建立***************************/
+        if (t_oMenu.strFatherId == "NULL")
+        {
+            if (t_oMenu.strStyle == "MENU")
+            {
+                QMenu *pMenu = new QMenu(t_oMenu.strName);
+                m_pWnd->ui.menubar->addMenu(pMenu);
+                m_oAllMenus.insert(t_oMenu.strFunction, pMenu);
+            }
+            else if (t_oMenu.strStyle == "MENUSEP")
+            {
+                m_pWnd->ui.menubar->addSeparator();
+            }
+        }
+        else
+        {
+            QMap<QString, QMenu*>::iterator iter = m_oAllMenus.find(t_oMenu.strFatherId);
+            if (iter != m_oAllMenus.end())
+            {
+                /*********************样式设置***************************/
+                if (t_oMenu.strStyle == "MENU")
+                {
+                    QMenu *pMenu = new QMenu(t_oMenu.strName);
+                    iter.value()->addMenu(pMenu);
+                    m_oAllMenus.insert(t_oMenu.strFunction, pMenu);
+                }
+                else if (t_oMenu.strStyle == "MENUSEP")
+                {
+                    iter.value()->addSeparator();
+                }
 
-        /*********************样式设置***************************/
+            }
+        }
+
+        /***************除菜单外，其他样式**************************/
         if (t_oMenu.strStyle == "NULL")
         {
             insertMenuAction(t_oMenu);
-        }
-        else if (t_oMenu.strStyle == "MENU")
-        {
-            QMenu *pMenu = new QMenu(t_oMenu.strName);
-            m_pWnd->ui.menubar->addMenu(pMenu);
-            m_oAllMenus.insert(t_oMenu.strFunction, pMenu);
-        }
-        else if (t_oMenu.strStyle == "MENUSEP")
-        {
-            m_pWnd->ui.menubar->addSeparator();
         }
         else if (t_oMenu.strStyle == "TOOLBARSEP")
         {
@@ -101,6 +124,7 @@ void CMenu::initUI()
         {
             m_pWnd->ui.toolBar->addAction(t_oMenu.strName);
         }
+
     }
 }
 
@@ -111,16 +135,17 @@ void CMenu::insertMenuAction(MenuDetail &in_oMenu)
     {
         if (in_oMenu.strStyle == "NULL")
         {
+            QAction *pAction = NULL;
             if (in_oMenu.strIcon != "NULL")
             {
                 QIcon oIcon(m_strResDirPath + "/" + in_oMenu.strIcon);
-                iter.value()->addAction(oIcon, in_oMenu.strName);
+                pAction = iter.value()->addAction(oIcon, in_oMenu.strName);
             }
             else
             {
-                iter.value()->addAction(in_oMenu.strName);
+                pAction = iter.value()->addAction(in_oMenu.strName);
             }
-
+            QObject::connect(pAction, SIGNAL(triggered(bool)), this, SLOT());
         }
         else if (in_oMenu.strStyle == "MENU")
         {

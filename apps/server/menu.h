@@ -29,6 +29,7 @@
 #include <QString>
 #include <QList>
 #include <QMap>
+#include <QObject>
 
 typedef struct
 {
@@ -46,8 +47,9 @@ typedef QList<MenuDetail> Menus;
 class MainWindow;
 class QMenu;
 
-class CMenu
+class CMenu : public QObject
 {
+    Q_OBJECT
 public:
 
     /**
