@@ -17,7 +17,10 @@ SET(MOCS
 
 )
 
-SET(UI #${CMAKE_CURRENT_SOURCE_DIR}/mainwindow.ui
+SET(UI ${CMAKE_CURRENT_SOURCE_DIR}/mainwindow.ui
+		${CMAKE_CURRENT_SOURCE_DIR}/modulelist.ui
+		${CMAKE_CURRENT_SOURCE_DIR}/systemlog.ui
+		${CMAKE_CURRENT_SOURCE_DIR}/threadlog.ui
 		)
 	
 
