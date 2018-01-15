@@ -9,6 +9,7 @@ SET(SRCS
   ${CMAKE_CURRENT_SOURCE_DIR}/threadlog.cpp
 
   ${CMAKE_CURRENT_SOURCE_DIR}/menu.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/dllmaper.cpp
 
 )
 
@@ -20,6 +21,7 @@ SET(HDRS
 	${CMAKE_CURRENT_SOURCE_DIR}/threadlog.h
 
 	${CMAKE_CURRENT_SOURCE_DIR}/menu.h
+	${CMAKE_CURRENT_SOURCE_DIR}/dllmaper.h
 )
 
 SET(MOCS
@@ -29,6 +31,7 @@ SET(MOCS
 	${CMAKE_CURRENT_SOURCE_DIR}/threadlog.h
 
 	${CMAKE_CURRENT_SOURCE_DIR}/menu.h
+	${CMAKE_CURRENT_SOURCE_DIR}/dllmaper.h
 
 )
 

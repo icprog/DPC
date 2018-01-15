@@ -1,6 +1,7 @@
 ﻿#include "menu.h"
 #include "ctkLog.h"
 #include "mainwindow.h"
+#include "dllmaper.h"
 
 #include <QCoreApplication>
 #include <QFile>
@@ -17,7 +18,12 @@ CMenu::CMenu(MainWindow *parent) :m_pWnd(parent)
 
 CMenu::~CMenu()
 {
-
+    // 释放所有保存的实例
+    foreach(CDllMaper *p, m_oDllMapers)
+    {
+        delete p;
+    }
+    m_oDllMapers.clear();
 }
 
 void CMenu::init()
@@ -122,7 +128,11 @@ void CMenu::initUI()
         }
         else if (t_oMenu.strStyle == "TOOLBARICON")
         {
-            m_pWnd->ui.toolBar->addAction(t_oMenu.strName);
+            QAction *pAction = m_pWnd->ui.toolBar->addAction(t_oMenu.strName);
+            // 此处只实例化一次，未考虑释放
+            CDllMaper *pDllMaper = new CDllMaper(t_oMenu.strLibrary, t_oMenu.strFunction);
+            m_oDllMapers.append(pDllMaper);
+            connect(pAction, SIGNAL(triggered(bool)), pDllMaper, SLOT(trigger(bool)));
         }
 
     }
@@ -145,7 +155,10 @@ void CMenu::insertMenuAction(MenuDetail &in_oMenu)
             {
                 pAction = iter.value()->addAction(in_oMenu.strName);
             }
-            QObject::connect(pAction, SIGNAL(triggered(bool)), this, SLOT());
+            // 此处只实例化一次，未考虑释放
+            CDllMaper *pDllMaper = new CDllMaper(in_oMenu.strLibrary, in_oMenu.strFunction);
+            m_oDllMapers.append(pDllMaper);
+            QObject::connect(pAction, SIGNAL(triggered(bool)), pDllMaper, SLOT(trigger(bool)));
         }
         else if (in_oMenu.strStyle == "MENU")
         {

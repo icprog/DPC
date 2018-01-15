@@ -46,6 +46,7 @@ typedef QList<MenuDetail> Menus;
 /**************前置声明***************************/
 class MainWindow;
 class QMenu;
+class CDllMaper;
 
 class CMenu : public QObject
 {
@@ -91,5 +92,6 @@ private:
     MainWindow *m_pWnd;			// 主窗口
     Menus m_oMenu;				// 内部存储解析的menu.ini配置信息
     QMap<QString, QMenu*> m_oAllMenus;	// 菜单全集
+    QList<CDllMaper *> m_oDllMapers;	// 保存所有动态库的信息，及时释放
 };
 #endif
