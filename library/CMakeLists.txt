@@ -1,4 +1,6 @@
 ﻿ADD_SUBDIRECTORY(ctkLogger)
+ADD_SUBDIRECTORY(ctkPublicFun)
+ADD_SUBDIRECTORY(ctkControl)
 
 
 

@@ -2,6 +2,7 @@
 #include "ctkLog.h"
 #include "mainwindow.h"
 #include "dllmaper.h"
+#include "pathbuilder.h"
 
 #include <QCoreApplication>
 #include <QFile>
@@ -9,8 +10,9 @@
 
 CMenu::CMenu(MainWindow *parent) :m_pWnd(parent)
 {
-    m_strMenuFilePath = QCoreApplication::applicationDirPath() + "/config/menu.ini";
-    m_strResDirPath = QCoreApplication::applicationDirPath() + "/procpe/res";
+    CPathBuilder oPathBuilder;
+    m_strMenuFilePath = QCoreApplication::applicationDirPath() + "/conf/menu.ini";
+    m_strResDirPath = oPathBuilder.getProcpePath();
     init();
 
     initUI();

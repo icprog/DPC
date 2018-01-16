@@ -50,6 +50,7 @@ INCLUDE_DIRECTORIES(
 					${VLD_INCLUDE}
 					${RootProjectInclude}
 					${RootProjectInclude}/QsLog
+					${RootProjectInclude}/ctkPublicFun
 					${CMAKE_CURRENT_BINARY_DIR}/
 				)
 
@@ -71,6 +72,7 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 	${QT_QTUITOOLS_LIBRARY}
 	${VLD_LIB}
 	ctkLogger
+	ctkPublicFun
 )
 
 

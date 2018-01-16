@@ -1,5 +1,6 @@
 ﻿#include "dllmaper.h"
 #include "ctkLog.h"
+#include "pathbuilder.h"
 
 #include <QLibrary>
 #include <QCoreApplication>
@@ -11,7 +12,9 @@ CDllMaper::CDllMaper(const QString &dllname, const QString &functionname)
     {
         return;
     }
-    QString strLibPath = QCoreApplication::applicationDirPath() + "/procpe/sys/";
+    CPathBuilder oBuilder;
+
+    QString strLibPath = oBuilder.getControlPath();
     QLibrary oLib(strLibPath + dllname);
     if (!oLib.load())
     {

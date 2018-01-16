@@ -119,7 +119,9 @@ SET(RootProjectInclude ${RootProject}/include)
 #此处不存储插件路径，而存储系统的构建路径
 #SET(ctkPluginHomeDir ${CMAKE_BINARY_DIR}/bin/plugins/${DEST_BUILD_VERSION})
 #文件操作命令
-#FILE(WRITE ${CMAKE_BINARY_DIR}/bin/radarprojectbuildpath.txt "${CMAKE_BINARY_DIR}/bin/")
+FILE(WRITE ${CMAKE_BINARY_DIR}/bin/projectbuildpath.txt "${CMAKE_BINARY_DIR}/bin/")
+FILE(APPEND ${CMAKE_BINARY_DIR}/bin/projectbuildpath.txt "\n")
+FILE(APPEND ${CMAKE_BINARY_DIR}/bin/projectbuildpath.txt "${CMAKE_BUILD_TYPE}")
 
 #待翻译的文件，定义全局变量
 #SET(FILES_TO_TRANSLATE)
